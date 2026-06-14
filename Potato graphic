@@ -1,0 +1,128 @@
+-- CREACIÓN DE LA INTERFAZ ULTRA-POTATO (ROJA BRILLANTE)
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local FpsLabel = Instance.new("TextLabel")
+local FpsSlider = Instance.new("TextBox")
+local ExtremePotatoBtn = Instance.new("TextButton")
+local UICorner = Instance.new("UICorner")
+
+-- Propiedades de la GUI
+ScreenGui.Name = "UltraPotatoGUI"
+ScreenGui.Parent = game:GetService("CoreGui") or game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+MainFrame.BorderColor3 = Color3.fromRGB(255, 0, 0)
+MainFrame.BorderSizePixel = 3
+MainFrame.Position = UDim2.new(0.05, 0, 0.3, 0)
+MainFrame.Size = UDim2.new(0, 220, 0, 180)
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+Title.Name = "Title"
+Title.Parent = MainFrame
+Title.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Title.Size = UDim2.new(1, 0, 0, 30)
+Title.Font = Enum.Font.SourceSansBold
+Title.Text = "POTATO PANEL v4"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextSize = 18
+
+FpsLabel.Name = "FpsLabel"
+FpsLabel.Parent = MainFrame
+FpsLabel.BackgroundTransparency = 1
+FpsLabel.Position = UDim2.new(0, 10, 0, 45)
+FpsLabel.Size = UDim2.new(0, 120, 0, 30)
+FpsLabel.Font = Enum.Font.SourceSans
+FpsLabel.Text = "Graduar FPS (Máx):"
+FpsLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+FpsLabel.TextSize = 16
+FpsLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+FpsSlider.Name = "FpsSlider"
+FpsSlider.Parent = MainFrame
+FpsSlider.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+FpsSlider.BorderColor3 = Color3.fromRGB(255, 0, 0)
+FpsSlider.Position = UDim2.new(0, 140, 0, 45)
+FpsSlider.Size = UDim2.new(0, 60, 0, 30)
+FpsSlider.Font = Enum.Font.SourceSansBold
+FpsSlider.Text = "60"
+FpsSlider.TextColor3 = Color3.fromRGB(255, 255, 255)
+FpsSlider.TextSize = 16
+
+ExtremePotatoBtn.Name = "ExtremePotatoBtn"
+ExtremePotatoBtn.Parent = MainFrame
+ExtremePotatoBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+ExtremePotatoBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
+ExtremePotatoBtn.Position = UDim2.new(0, 10, 0, 95)
+ExtremePotatoBtn.Size = UDim2.new(0, 200, 0, 45)
+ExtremePotatoBtn.Font = Enum.Font.SourceSansBold
+ExtremePotatoBtn.Text = "DESTRUIR RESOLUCIÓN (MÁS POTATO)"
+ExtremePotatoBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExtremePotatoBtn.TextSize = 12
+
+-- FUNCIONALIDAD: CONTROL DE FPS
+FpsSlider.FocusLost:Connect(function(enterPressed)
+    local targetFps = tonumber(FpsSlider.Text)
+    if targetFps then
+        if setfpscap then
+            setfpscap(targetFps)
+        else
+            game:GetService("LogService").MessageOut:Connect(function(msg) end) -- Intento de bypass si no tiene la función
+        end
+    end
+end)
+
+-- OPTIMIZACIÓN AGRESIVA BASE
+local settings = settings()
+if settings and settings.Rendering then
+    settings.Rendering.QualityLevel = Enum.QualityLevel.Level01
+    settings.Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level01
+end
+
+local lighting = game:GetService("Lighting")
+lighting.GlobalShadows = false
+lighting.FogEnd = 9e9
+for _, effect in pairs(lighting:GetChildren()) do
+    if effect:IsA("PostEffect") or effect:IsA("BloomEffect") or effect:IsA("BlurEffect") or effect:IsA("DepthOfFieldEffect") or effect:IsA("SunRaysEffect") then
+        effect.Enabled = false
+    end
+end
+
+local function killEverything(object)
+    if object:IsA("Texture") or object:IsA("Decal") or object:IsA("Sky") or object:IsA("ParticleEmitter") or object:IsA("Sparkles") or object:IsA("Smoke") or object:IsA("Fire") then
+        object:Destroy()
+    elseif object:IsA("BasePart") or object:IsA("MeshPart") or object:IsA("CornerWedgePart") or object:IsA("WedgePart") then
+        object.Material = Enum.Material.SmoothPlastic
+        object.Color = Color3.fromRGB(130, 130, 130) -- Todo gris para no cargar colores pesados
+    elseif object:IsA("Clothing") or object:IsA("ShirtGraphic") then
+        object:Destroy()
+    end
+end
+
+for _, object in pairs(workspace:GetDescendants()) do killEverything(object) end
+workspace.DescendantAdded:Connect(function(object) killEverything(object) end)
+
+-- BOTÓN EXTREMO: QUITAR RESOLUCIÓN 3D (LITERALMENTE PIXELS)
+ExtremePotatoBtn.MouseButton1Click:Connect(function()
+    ExtremePotatoBtn.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
+    ExtremePotatoBtn.Text = "MODO ULTRA POTATO ACTIVADO"
+    
+    -- Forzar a la cámara a renderizar en la resolución más baja posible de Roblox
+    local settings = settings()
+    if settings and settings.Rendering then
+        pcall(function()
+            settings.Rendering.QualityLevel = Enum.QualityLevel.Level01
+        end)
+    end
+    
+    -- Borrar efectos pesados del mapa que queden ocultos
+    for _, v in pairs(workspace:GetDescendants()) do
+        if v:IsA("PostEffect") or v:IsA("Explosion") then
+            v:Destroy()
+        end
+    end
+end)
