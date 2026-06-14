@@ -1,88 +1,178 @@
--- CREACIÓN DE LA INTERFAZ ULTRA-POTATO (ROJA BRILLANTE)
+-- CREACIÓN DE LA INTERFAZ ULTRA-POTATO COMPACTA Y CERRABLE
 local ScreenGui = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
 local Title = Instance.new("TextLabel")
 local FpsLabel = Instance.new("TextLabel")
 local FpsSlider = Instance.new("TextBox")
 local ExtremePotatoBtn = Instance.new("TextButton")
-local UICorner = Instance.new("UICorner")
+local CloseBtn = Instance.new("TextButton")
+local OpenBtn = Instance.new("TextButton")
+local MainCorner = Instance.new("UICorner")
+local BtnCorner = Instance.new("UICorner")
+local OpenCorner = Instance.new("UICorner")
 
--- Propiedades de la GUI
+-- Configuración Base de la GUI
 ScreenGui.Name = "UltraPotatoGUI"
 ScreenGui.Parent = game:GetService("CoreGui") or game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ResetOnSpawn = false
 
+-- BOTÓN FLOTANTE PARA ABRIR
+OpenBtn.Name = "OpenBtn"
+OpenBtn.Parent = ScreenGui
+OpenBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+OpenBtn.Position = UDim2.new(0.02, 0, 0.2, 0)
+OpenBtn.Size = UDim2.new(0, 40, 0, 40)
+OpenBtn.Font = Enum.Font.SourceSansBold
+OpenBtn.Text = "P"
+OpenBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+OpenBtn.TextSize = 22
+OpenBtn.Visible = false
+OpenBtn.Active = true
+OpenBtn.Draggable = true
+
+OpenCorner.CornerRadius = UDim.new(0, 20)
+OpenCorner.Parent = OpenBtn
+
+-- PANEL PRINCIPAL COMPACTO
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = ScreenGui
-MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-MainFrame.BorderColor3 = Color3.fromRGB(255, 0, 0)
-MainFrame.BorderSizePixel = 3
+MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
 MainFrame.Position = UDim2.new(0.05, 0, 0.3, 0)
-MainFrame.Size = UDim2.new(0, 220, 0, 180)
+MainFrame.Size = UDim2.new(0, 200, 0, 130)
 MainFrame.Active = true
 MainFrame.Draggable = true
 
+MainCorner.CornerRadius = UDim.new(0, 10)
+MainCorner.Parent = MainFrame
+
+-- TÍTULO
 Title.Name = "Title"
 Title.Parent = MainFrame
-Title.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-Title.Size = UDim2.new(1, 0, 0, 30)
+Title.BackgroundTransparency = 1
+Title.Position = UDim2.new(0, 10, 0, 5)
+Title.Size = UDim2.new(0, 140, 0, 25)
 Title.Font = Enum.Font.SourceSansBold
-Title.Text = "POTATO PANEL v4"
-Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.TextSize = 18
+Title.Text = "POTATO PANEL"
+Title.TextColor3 = Color3.fromRGB(255, 0, 0)
+Title.TextSize = 16
+Title.TextXAlignment = Enum.TextXAlignment.Left
 
+-- BOTÓN PARA CERRAR (X)
+CloseBtn.Name = "CloseBtn"
+CloseBtn.Parent = MainFrame
+CloseBtn.BackgroundTransparency = 1
+CloseBtn.Position = UDim2.new(0, 170, 0, 5)
+CloseBtn.Size = UDim2.new(0, 25, 0, 25)
+CloseBtn.Font = Enum.Font.SourceSansBold
+CloseBtn.Text = "X"
+CloseBtn.TextColor3 = Color3.fromRGB(150, 150, 150)
+CloseBtn.TextSize = 16
+
+-- CONTROLLER: FPS LBL
 FpsLabel.Name = "FpsLabel"
 FpsLabel.Parent = MainFrame
 FpsLabel.BackgroundTransparency = 1
-FpsLabel.Position = UDim2.new(0, 10, 0, 45)
-FpsLabel.Size = UDim2.new(0, 120, 0, 30)
+FpsLabel.Position = UDim2.new(0, 10, 0, 40)
+FpsLabel.Size = UDim2.new(0, 110, 0, 25)
 FpsLabel.Font = Enum.Font.SourceSans
-FpsLabel.Text = "Graduar FPS (Máx):"
-FpsLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
-FpsLabel.TextSize = 16
+FpsLabel.Text = "Graduar FPS:"
+FpsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+FpsLabel.TextSize = 14
 FpsLabel.TextXAlignment = Enum.TextXAlignment.Left
 
+-- ENTRADA DE TEXTO FPS
 FpsSlider.Name = "FpsSlider"
 FpsSlider.Parent = MainFrame
-FpsSlider.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-FpsSlider.BorderColor3 = Color3.fromRGB(255, 0, 0)
-FpsSlider.Position = UDim2.new(0, 140, 0, 45)
-FpsSlider.Size = UDim2.new(0, 60, 0, 30)
+FpsSlider.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+FpsSlider.Position = UDim2.new(0, 130, 0, 40)
+FpsSlider.Size = UDim2.new(0, 60, 0, 25)
 FpsSlider.Font = Enum.Font.SourceSansBold
 FpsSlider.Text = "60"
-FpsSlider.TextColor3 = Color3.fromRGB(255, 255, 255)
-FpsSlider.TextSize = 16
+FpsSlider.TextColor3 = Color3.fromRGB(255, 0, 0)
+FpsSlider.TextSize = 14
 
+local FpsSliderCorner = Instance.new("UICorner")
+FpsSliderCorner.CornerRadius = UDim.new(0, 5)
+FpsSliderCorner.Parent = FpsSlider
+
+-- BOTÓN AGRESIVO ULTRA POTATO
 ExtremePotatoBtn.Name = "ExtremePotatoBtn"
 ExtremePotatoBtn.Parent = MainFrame
-ExtremePotatoBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
-ExtremePotatoBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
-ExtremePotatoBtn.Position = UDim2.new(0, 10, 0, 95)
-ExtremePotatoBtn.Size = UDim2.new(0, 200, 0, 45)
+ExtremePotatoBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+ExtremePotatoBtn.Position = UDim2.new(0, 10, 0, 80)
+ExtremePotatoBtn.Size = UDim2.new(0, 180, 0, 35)
 ExtremePotatoBtn.Font = Enum.Font.SourceSansBold
-ExtremePotatoBtn.Text = "DESTRUIR RESOLUCIÓN (MÁS POTATO)"
+ExtremePotatoBtn.Text = "DESTRUCCIÓN TOTAL (MAX FPS)"
 ExtremePotatoBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-ExtremePotatoBtn.TextSize = 12
+ExtremePotatoBtn.TextSize = 11
 
--- FUNCIONALIDAD: CONTROL DE FPS
+BtnCorner.CornerRadius = UDim.new(0, 6)
+BtnCorner.Parent = ExtremePotatoBtn
+
+-- LÓGICA DE ABRIR Y CERRAR INTERFAZ
+CloseBtn.MouseButton1Click:Connect(function()
+    MainFrame.Visible = false
+    OpenBtn.Visible = true
+end)
+
+OpenBtn.MouseButton1Click:Connect(function()
+    MainFrame.Visible = true
+    OpenBtn.Visible = false
+end)
+
+-- SISTEMA: CAMBIAR FPS CAP
 FpsSlider.FocusLost:Connect(function(enterPressed)
     local targetFps = tonumber(FpsSlider.Text)
-    if targetFps then
-        if setfpscap then
-            setfpscap(targetFps)
-        else
-            game:GetService("LogService").MessageOut:Connect(function(msg) end) -- Intento de bypass si no tiene la función
-        end
+    if targetFps and setfpscap then
+        pcall(function() setfpscap(targetFps) end)
     end
 end)
 
--- OPTIMIZACIÓN AGRESIVA BASE
-local settings = settings()
-if settings and settings.Rendering then
-    settings.Rendering.QualityLevel = Enum.QualityLevel.Level01
-    settings.Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level01
+-- FUNCIÓN DE LIMPIEZA TOTAL DE TEXTURAS, CUELLOS DE BOTELLA Y MAPA
+local function desmantelarObjeto(object)
+    -- Eliminar texturas, calcomanías, partículas, estelas y efectos ópticos
+    if object:IsA("Texture") or object:IsA("Decal") or object:IsA("ParticleEmitter") or object:IsA("Trail") or object:IsA("SelectionBox") or object:IsA("UIStroke") then
+        object:Destroy()
+    
+    -- Forzar mallas 3D y partes físicas a cajas planas y grises sin texturas internas
+    elseif object:IsA("BasePart") or object:IsA("MeshPart") or object:IsA("SpecialMesh") then
+        pcall(function()
+            if object:IsA("MeshPart") or object:IsA("SpecialMesh") then
+                -- Si tiene una ID de textura incrustada en la malla, se la borramos para dejarla en blanco
+                object.TextureID = "" 
+            end
+            object.Material = Enum.Material.SmoothPlastic -- Plástico liso mate
+            object.Color = Color3.fromRGB(90, 90, 90)     -- Gris neutral plano
+            object.Reflectance = 0                        -- Quitar reflejo de luces
+            object.CastShadow = false                     -- Desactivar cálculo de sombras
+        end)
+        
+    -- Quitar ropa pesada de otros jugadores que sature la memoria
+    elseif object:IsA("Clothing") or object:IsA("ShirtGraphic") then
+        object:Destroy()
+    end
 end
 
+-- Ejecutar barrido inicial al encender el script
+for _, object in pairs(workspace:GetDescendants()) do 
+    desmantelarObjeto(object) 
+end
+
+-- Monitoreo constante para que todo lo nuevo que cargue pierda resolución al instante
+workspace.DescendantAdded:Connect(function(object) 
+    desmantelarObjeto(object) 
+end)
+
+-- CONTROL INTEGRAL DE RENDIMIENTO DEL MOTOR GRÁFICO
+local settings = settings()
+if settings and settings.Rendering then
+    pcall(function()
+        settings.Rendering.QualityLevel = Enum.QualityLevel.Level01
+        settings.Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level01
+    end)
+end
+
+-- Apagar sombras globales e iluminación dinámica en el mapa
 local lighting = game:GetService("Lighting")
 lighting.GlobalShadows = false
 lighting.FogEnd = 9e9
@@ -92,37 +182,226 @@ for _, effect in pairs(lighting:GetChildren()) do
     end
 end
 
-local function killEverything(object)
-    if object:IsA("Texture") or object:IsA("Decal") or object:IsA("Sky") or object:IsA("ParticleEmitter") or object:IsA("Sparkles") or object:IsA("Smoke") or object:IsA("Fire") then
+-- ACCIÓN DEL BOTÓN AGRESIVO: ELIMINACIÓN DE MAPA EXTRA / ADORNOS DE PARED
+ExtremePotatoBtn.MouseButton1Click:Connect(function()
+    ExtremePotatoBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    ExtremePotatoBtn.Text = "MODO APAGÓN TOTAL ACTIVADO"
+    ExtremePotatoBtn.TextColor3 = Color3.fromRGB(150, 150, 150)
+    
+    -- Borrar de raíz carpetas de adornos pesados que suelen estar en el Workspace
+    pcall(function()
+        for _, v in pairs(workspace:GetDescendants()) do
+            -- Si el objeto se llama igual a decoraciones comunes del mapa, lo elimina
+            if v.Name:lower():find("candy") or v.Name:lower():find("sweet") or v.Name:lower():find("adorn") or v.Name:lower():find("decor") then
+                v:Destroy()
+            end
+            if v:IsA("BasePart") then
+                v.Material = Enum.Material.SmoothPlastic
+                v.Color = Color3.fromRGB(60, 60, 60)
+            end
+        end
+    </pcall>
+end)-- CREACIÓN DE LA INTERFAZ ULTRA-POTATO COMPACTA Y CERRABLE
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local FpsLabel = Instance.new("TextLabel")
+local FpsSlider = Instance.new("TextBox")
+local ExtremePotatoBtn = Instance.new("TextButton")
+local CloseBtn = Instance.new("TextButton")
+local OpenBtn = Instance.new("TextButton")
+local MainCorner = Instance.new("UICorner")
+local BtnCorner = Instance.new("UICorner")
+local OpenCorner = Instance.new("UICorner")
+
+-- Configuración Base de la GUI
+ScreenGui.Name = "UltraPotatoGUI"
+ScreenGui.Parent = game:GetService("CoreGui") or game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
+
+-- BOTÓN FLOTANTE PARA ABRIR
+OpenBtn.Name = "OpenBtn"
+OpenBtn.Parent = ScreenGui
+OpenBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+OpenBtn.Position = UDim2.new(0.02, 0, 0.2, 0)
+OpenBtn.Size = UDim2.new(0, 40, 0, 40)
+OpenBtn.Font = Enum.Font.SourceSansBold
+OpenBtn.Text = "P"
+OpenBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+OpenBtn.TextSize = 22
+OpenBtn.Visible = false
+OpenBtn.Active = true
+OpenBtn.Draggable = true
+
+OpenCorner.CornerRadius = UDim.new(0, 20)
+OpenCorner.Parent = OpenBtn
+
+-- PANEL PRINCIPAL COMPACTO
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+MainFrame.Position = UDim2.new(0.05, 0, 0.3, 0)
+MainFrame.Size = UDim2.new(0, 200, 0, 130)
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+MainCorner.CornerRadius = UDim.new(0, 10)
+MainCorner.Parent = MainFrame
+
+-- TÍTULO
+Title.Name = "Title"
+Title.Parent = MainFrame
+Title.BackgroundTransparency = 1
+Title.Position = UDim2.new(0, 10, 0, 5)
+Title.Size = UDim2.new(0, 140, 0, 25)
+Title.Font = Enum.Font.SourceSansBold
+Title.Text = "POTATO PANEL"
+Title.TextColor3 = Color3.fromRGB(255, 0, 0)
+Title.TextSize = 16
+Title.TextXAlignment = Enum.TextXAlignment.Left
+
+-- BOTÓN PARA CERRAR (X)
+CloseBtn.Name = "CloseBtn"
+CloseBtn.Parent = MainFrame
+CloseBtn.BackgroundTransparency = 1
+CloseBtn.Position = UDim2.new(0, 170, 0, 5)
+CloseBtn.Size = UDim2.new(0, 25, 0, 25)
+CloseBtn.Font = Enum.Font.SourceSansBold
+CloseBtn.Text = "X"
+CloseBtn.TextColor3 = Color3.fromRGB(150, 150, 150)
+CloseBtn.TextSize = 16
+
+-- CONTROLLER: FPS LBL
+FpsLabel.Name = "FpsLabel"
+FpsLabel.Parent = MainFrame
+FpsLabel.BackgroundTransparency = 1
+FpsLabel.Position = UDim2.new(0, 10, 0, 40)
+FpsLabel.Size = UDim2.new(0, 110, 0, 25)
+FpsLabel.Font = Enum.Font.SourceSans
+FpsLabel.Text = "Graduar FPS:"
+FpsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+FpsLabel.TextSize = 14
+FpsLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+-- ENTRADA DE TEXTO FPS
+FpsSlider.Name = "FpsSlider"
+FpsSlider.Parent = MainFrame
+FpsSlider.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+FpsSlider.Position = UDim2.new(0, 130, 0, 40)
+FpsSlider.Size = UDim2.new(0, 60, 0, 25)
+FpsSlider.Font = Enum.Font.SourceSansBold
+FpsSlider.Text = "60"
+FpsSlider.TextColor3 = Color3.fromRGB(255, 0, 0)
+FpsSlider.TextSize = 14
+
+local FpsSliderCorner = Instance.new("UICorner")
+FpsSliderCorner.CornerRadius = UDim.new(0, 5)
+FpsSliderCorner.Parent = FpsSlider
+
+-- BOTÓN AGRESIVO ULTRA POTATO
+ExtremePotatoBtn.Name = "ExtremePotatoBtn"
+ExtremePotatoBtn.Parent = MainFrame
+ExtremePotatoBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+ExtremePotatoBtn.Position = UDim2.new(0, 10, 0, 80)
+ExtremePotatoBtn.Size = UDim2.new(0, 180, 0, 35)
+ExtremePotatoBtn.Font = Enum.Font.SourceSansBold
+ExtremePotatoBtn.Text = "DESTRUCCIÓN TOTAL (MAX FPS)"
+ExtremePotatoBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExtremePotatoBtn.TextSize = 11
+
+BtnCorner.CornerRadius = UDim.new(0, 6)
+BtnCorner.Parent = ExtremePotatoBtn
+
+-- LÓGICA DE ABRIR Y CERRAR INTERFAZ
+CloseBtn.MouseButton1Click:Connect(function()
+    MainFrame.Visible = false
+    OpenBtn.Visible = true
+end)
+
+OpenBtn.MouseButton1Click:Connect(function()
+    MainFrame.Visible = true
+    OpenBtn.Visible = false
+end)
+
+-- SISTEMA: CAMBIAR FPS CAP
+FpsSlider.FocusLost:Connect(function(enterPressed)
+    local targetFps = tonumber(FpsSlider.Text)
+    if targetFps and setfpscap then
+        pcall(function() setfpscap(targetFps) end)
+    end
+end)
+
+-- FUNCIÓN DE LIMPIEZA TOTAL DE TEXTURAS, CUELLOS DE BOTELLA Y MAPA
+local function desmantelarObjeto(object)
+    -- Eliminar texturas, calcomanías, partículas, estelas y efectos ópticos
+    if object:IsA("Texture") or object:IsA("Decal") or object:IsA("ParticleEmitter") or object:IsA("Trail") or object:IsA("SelectionBox") or object:IsA("UIStroke") then
         object:Destroy()
-    elseif object:IsA("BasePart") or object:IsA("MeshPart") or object:IsA("CornerWedgePart") or object:IsA("WedgePart") then
-        object.Material = Enum.Material.SmoothPlastic
-        object.Color = Color3.fromRGB(130, 130, 130) -- Todo gris para no cargar colores pesados
+    
+    -- Forzar mallas 3D y partes físicas a cajas planas y grises sin texturas internas
+    elseif object:IsA("BasePart") or object:IsA("MeshPart") or object:IsA("SpecialMesh") then
+        pcall(function()
+            if object:IsA("MeshPart") or object:IsA("SpecialMesh") then
+                -- Si tiene una ID de textura incrustada en la malla, se la borramos para dejarla en blanco
+                object.TextureID = "" 
+            end
+            object.Material = Enum.Material.SmoothPlastic -- Plástico liso mate
+            object.Color = Color3.fromRGB(90, 90, 90)     -- Gris neutral plano
+            object.Reflectance = 0                        -- Quitar reflejo de luces
+            object.CastShadow = false                     -- Desactivar cálculo de sombras
+        end)
+        
+    -- Quitar ropa pesada de otros jugadores que sature la memoria
     elseif object:IsA("Clothing") or object:IsA("ShirtGraphic") then
         object:Destroy()
     end
 end
 
-for _, object in pairs(workspace:GetDescendants()) do killEverything(object) end
-workspace.DescendantAdded:Connect(function(object) killEverything(object) end)
+-- Ejecutar barrido inicial al encender el script
+for _, object in pairs(workspace:GetDescendants()) do 
+    desmantelarObjeto(object) 
+end
 
--- BOTÓN EXTREMO: QUITAR RESOLUCIÓN 3D (LITERALMENTE PIXELS)
+-- Monitoreo constante para que todo lo nuevo que cargue pierda resolución al instante
+workspace.DescendantAdded:Connect(function(object) 
+    desmantelarObjeto(object) 
+end)
+
+-- CONTROL INTEGRAL DE RENDIMIENTO DEL MOTOR GRÁFICO
+local settings = settings()
+if settings and settings.Rendering then
+    pcall(function()
+        settings.Rendering.QualityLevel = Enum.QualityLevel.Level01
+        settings.Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level01
+    end)
+end
+
+-- Apagar sombras globales e iluminación dinámica en el mapa
+local lighting = game:GetService("Lighting")
+lighting.GlobalShadows = false
+lighting.FogEnd = 9e9
+for _, effect in pairs(lighting:GetChildren()) do
+    if effect:IsA("PostEffect") or effect:IsA("BloomEffect") or effect:IsA("BlurEffect") or effect:IsA("DepthOfFieldEffect") or effect:IsA("SunRaysEffect") then
+        effect.Enabled = false
+    end
+end
+
+-- ACCIÓN DEL BOTÓN AGRESIVO: ELIMINACIÓN DE MAPA EXTRA / ADORNOS DE PARED
 ExtremePotatoBtn.MouseButton1Click:Connect(function()
-    ExtremePotatoBtn.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
-    ExtremePotatoBtn.Text = "MODO ULTRA POTATO ACTIVADO"
+    ExtremePotatoBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    ExtremePotatoBtn.Text = "MODO APAGÓN TOTAL ACTIVADO"
+    ExtremePotatoBtn.TextColor3 = Color3.fromRGB(150, 150, 150)
     
-    -- Forzar a la cámara a renderizar en la resolución más baja posible de Roblox
-    local settings = settings()
-    if settings and settings.Rendering then
-        pcall(function()
-            settings.Rendering.QualityLevel = Enum.QualityLevel.Level01
-        end)
-    end
-    
-    -- Borrar efectos pesados del mapa que queden ocultos
-    for _, v in pairs(workspace:GetDescendants()) do
-        if v:IsA("PostEffect") or v:IsA("Explosion") then
-            v:Destroy()
+    -- Borrar de raíz carpetas de adornos pesados que suelen estar en el Workspace
+    pcall(function()
+        for _, v in pairs(workspace:GetDescendants()) do
+            -- Si el objeto se llama igual a decoraciones comunes del mapa, lo elimina
+            if v.Name:lower():find("candy") or v.Name:lower():find("sweet") or v.Name:lower():find("adorn") or v.Name:lower():find("decor") then
+                v:Destroy()
+            end
+            if v:IsA("BasePart") then
+                v.Material = Enum.Material.SmoothPlastic
+                v.Color = Color3.fromRGB(60, 60, 60)
+            end
         end
-    end
+    </pcall>
 end)
